@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Library — NoteBazaar</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/firebase-config.js"></script>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main class="container">
+    <h1 class="page-title">📚 My Library</h1>
+    <p class="page-sub">All notes you've unlocked — free or purchased. Read online or download anytime.</p>
+    <section id="library-grid" class="grid" aria-live="polite"></section>
+    <div id="empty-state"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="f-brand">📚 NoteBazaar</span>
+      <p>© 2026 NoteBazaar · Payments secured via UPI · Built with Firebase</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/library.js"></script>
+</body>
+</html>

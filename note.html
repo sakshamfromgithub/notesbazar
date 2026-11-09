@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note Details — NoteBazaar</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/firebase-config.js"></script>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main class="container">
+    <a class="back-link" href="index.html">← Back to all notes</a>
+
+    <div class="note-layout">
+      <!-- PDF viewer / locked placeholder -->
+      <section class="viewer-card">
+        <div class="viewer-head">
+          <span id="viewer-title">Loading…</span>
+          <span id="viewer-status"></span>
+        </div>
+        <div class="viewer-body" id="viewer-body">
+          <div class="skeleton" style="margin:auto">Loading note…</div>
+        </div>
+      </section>
+
+      <!-- Details side panel -->
+      <aside class="side-panel">
+        <h1 id="np-title">Loading…</h1>
+        <p class="desc" id="np-desc"></p>
+        <div class="side-meta" id="np-meta"></div>
+        <div class="side-price" id="np-price"></div>
+        <div class="action-area" id="action-area"></div>
+        <div class="trust-note" id="trust-note" hidden>
+          🔒 Payments are verified by the NoteBazaar team. Your purchase is saved to your account — access it anytime from <b>My Library</b>.
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Buy / payment modal -->
+  <div class="modal-backdrop" id="buy-modal" hidden>
+    <div class="modal">
+      <button class="modal-x" id="buy-x" aria-label="Close">✕</button>
+      <h3>Complete your purchase</h3>
+      <p class="hint" id="buy-note-label" style="margin-top:2px"></p>
+
+      <div class="pay-amount-row">
+        <span class="lbl">Amount to pay</span>
+        <span class="val" id="pay-amount">₹0</span>
+      </div>
+
+      <ol class="pay-steps">
+        <li><b>Pay</b> the exact amount to the UPI ID below (payee: <b>NoteBazaar</b>) — scan the QR or open any UPI app.</li>
+        <li>Copy the <b>UTR / Transaction ID</b> from your payment app.</li>
+        <li>Submit it below — admin verifies &amp; unlocks your note.</li>
+      </ol>
+
+      <div class="upi-card">
+        <div class="qr-box"><img id="upi-qr" alt="UPI QR code" referrerpolicy="no-referrer"></div>
+        <div class="upi-info">
+          <span class="payee">Pay to <b>NoteBazaar</b></span>
+          <div class="upi-id-row">
+            <span class="upi-id" id="upi-id-text"></span>
+            <button class="btn btn-outline btn-sm" id="copy-upi" type="button">Copy</button>
+          </div>
+          <a class="btn btn-green btn-sm" id="open-upi" href="#" style="text-align:center">📲 Open UPI App</a>
+          <span class="hint">QR &amp; app link work best on mobile</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <label class="field"><span>UTR / Transaction ID (from your UPI app)</span>
+        <input type="text" id="utr-input" class="mono" placeholder="e.g. 4231 8890 1234" maxlength="22" autocomplete="off">
+      </label>
+      <p class="form-err" id="utr-err"></p>
+      <button class="btn btn-primary btn-block" id="submit-order" type="button">✅ I've paid — submit for approval</button>
+      <p class="modal-foot">Admin usually verifies within a few minutes.<br>You'll find this note in <b>My Library</b> once approved.</p>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="f-brand">📚 NoteBazaar</span>
+      <p>© 2026 NoteBazaar · Payments secured via UPI · Built with Firebase</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/note.js"></script>
+</body>
+</html>

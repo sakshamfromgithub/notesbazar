@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteBazaar — Buy &amp; Download Study Notes</title>
+  <meta name="description" content="NoteBazaar — premium study notes. Buy once, read & download anytime. Free notes available too.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/firebase-config.js"></script>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main class="container">
+    <section class="hero">
+      <span class="hero-kicker">Study smarter, not harder</span>
+      <h1>Premium study notes,<br><em>delivered instantly.</em></h1>
+      <p>Topper-quality notes at student-friendly prices. Pay once via UPI, unlock forever — read online and download the PDF anytime. Free notes available too!</p>
+      <div class="hero-points">
+        <span>⚡ <b>Instant access</b> after approval</span>
+        <span>📲 <b>UPI payments</b> — GPay / PhonePe / Paytm</span>
+        <span>🆓 <b>Free notes</b> — no payment needed</span>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search notes by title or topic…">
+      </div>
+      <select class="sort" id="sort-select" aria-label="Sort notes">
+        <option value="new">Newest first</option>
+        <option value="free">Free first</option>
+        <option value="low">Price: Low → High</option>
+        <option value="high">Price: High → Low</option>
+      </select>
+    </section>
+
+    <section id="notes-grid" class="grid" aria-live="polite"></section>
+    <div id="empty-state"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="f-brand">📚 NoteBazaar</span>
+      <p>© 2026 NoteBazaar · Payments secured via UPI · Built with Firebase</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

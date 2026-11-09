@@ -1,0 +1,53 @@
+rules_version = '2';
+
+// ============================================================
+//  NoteBazaar — Firestore Security Rules
+//  ⚠️ BEFORE PUBLISHING: replace REPLACE_WITH_ADMIN_EMAIL
+//     with your real login email (the same one you put in
+//     ADMIN_EMAILS inside js/firebase-config.js).
+// ============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() &&
+             request.auth.token.email in ['REPLACE_WITH_ADMIN_EMAIL'];
+    }
+
+    // Notes catalog — anyone can browse, only admin can create/edit/delete
+    match /notes/{noteId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Purchase orders — buyer creates own order, admin reviews it
+    match /purchases/{orderId} {
+      allow create: if isSignedIn()
+                    && request.resource.data.userId == request.auth.uid
+                    && request.resource.data.status == 'pending';
+      allow read: if isAdmin() ||
+                     (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    // User library — which notes this user has unlocked
+    // (admin writes here when approving a payment;
+    //  the user writes here when claiming a free note)
+    match /users/{userId}/library/{noteId} {
+      allow read: if isAdmin() ||
+                     (isSignedIn() && userId == request.auth.uid);
+      allow create, update, delete: if isAdmin() ||
+                     (isSignedIn() && userId == request.auth.uid);
+    }
+
+    // Everything else: denied
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

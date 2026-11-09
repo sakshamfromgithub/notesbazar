@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — NoteBazaar</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/firebase-config.js"></script>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <main class="container">
+    <h1 class="page-title">🛠️ Admin Panel</h1>
+    <p class="page-sub">Upload notes, set prices (₹0 = free), and verify buyer payments.</p>
+
+    <!-- Guard / login prompt -->
+    <div id="admin-guard"></div>
+
+    <!-- Admin panel -->
+    <div id="admin-panel" hidden>
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="upload">⬆️ Upload Note</button>
+        <button class="admin-tab" data-tab="notes">📄 My Notes <span id="notes-count"></span></button>
+        <button class="admin-tab" data-tab="orders">🧾 Payment Orders <span id="pending-count"></span></button>
+      </div>
+
+      <!-- TAB: upload -->
+      <section id="tab-upload" class="admin-panel-box">
+        <div class="upload-grid">
+          <form id="upload-form">
+            <label class="field"><span>Note title *</span>
+              <input type="text" id="up-title" placeholder="e.g. Physics — Complete Kinematics Revision" required maxlength="120"></label>
+            <label class="field"><span>Description</span>
+              <textarea id="up-desc" placeholder="What's inside? Chapters, page count, exam relevance…" maxlength="600"></textarea></label>
+            <label class="field"><span>Price (₹) — set 0 to make it FREE *</span>
+              <input type="number" id="up-price" placeholder="0 = free note" min="0" step="1" required></label>
+            <button class="btn btn-primary btn-lg" id="up-submit" type="submit">🚀 Publish Note</button>
+          </form>
+          <div>
+            <div class="drop-zone" id="drop-zone">
+              <span class="dz-ico">📄</span>
+              <span class="dz-main" id="dz-main">Click or drop PDF here</span>
+              <span class="dz-sub">Only PDF files · stored securely in Firebase Storage</span>
+            </div>
+            <input type="file" id="up-file" accept="application/pdf,.pdf" hidden>
+            <div class="file-chip" id="file-chip" hidden>
+              <span>📕</span><span id="file-name" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+              <button class="btn btn-ghost btn-sm" id="file-clear" type="button">✕</button>
+            </div>
+            <div class="progress-wrap" id="progress-wrap">
+              <div class="progress-bar" id="progress-bar"></div>
+              <div class="progress-label" id="progress-label">Uploading… 0%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: my notes -->
+      <section id="tab-notes" class="admin-panel-box" hidden>
+        <div id="admin-notes-list"><div class="skeleton">Loading notes…</div></div>
+      </section>
+
+      <!-- TAB: orders -->
+      <section id="tab-orders" class="admin-panel-box" hidden>
+        <div class="section-head" style="margin-top:0">⏳ Pending verification <span class="chip chip-pending" id="pending-chip">0</span></div>
+        <div id="pending-orders"><div class="skeleton">Loading orders…</div></div>
+        <div class="section-head">🗂️ All orders</div>
+        <div id="all-orders"><div class="skeleton">Loading…</div></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="f-brand">📚 NoteBazaar</span>
+      <p>© 2026 NoteBazaar · Payments secured via UPI · Built with Firebase</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
