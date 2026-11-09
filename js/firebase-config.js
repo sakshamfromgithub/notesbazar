@@ -11,12 +11,18 @@
 // ============================================================
 
 window.FIREBASE_CONFIG = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_PROJECT.appspot.com",
-  messagingSenderId: "PASTE_YOUR_SENDER_ID",
-  appId: "PASTE_YOUR_APP_ID"
+  apiKey: "AIzaSyBC2CQmn6UVCGF1qhgV4-tOeNMtEr8etdo",
+
+  authDomain: "notesbazaar-74388.firebaseapp.com",
+
+  projectId: "notesbazaar-74388",
+
+  storageBucket: "notesbazaar-74388.firebasestorage.app",
+
+  messagingSenderId: "658844879296",
+
+  appId: "1:658844879296:web:13cdbb0ff6106959cda025"
+
 };
 
 // ------------------------------------------------------------
